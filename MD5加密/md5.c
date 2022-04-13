@@ -261,7 +261,7 @@ int string_compared_with_md5_data(char *normal_string, char *md5_string)
 int main(int argc, char *argv[])
 {
     int i;
-    unsigned char encrypt[] = "tenda_mfg"; // 21232f297a57a5a743894a0e4a801fc3
+    unsigned char encrypt[] = "qJ7GeGDe"; // 21232f297a57a5a743894a0e4a801fc3
     char buf[64] = {0};
     MD5_Encrypt_String(encrypt, buf, sizeof(buf));
     printf("buf = %s\n", buf);
