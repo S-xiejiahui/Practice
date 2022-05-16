@@ -1,0 +1,31 @@
+1、下载 web 文件的方法(-O 重命名)
+    wget -O./rename.txt "https://standards-oui.ieee.org/oui/oui.txt"
+
+2、for 循环，while 循环
+    [2.1] while 循环：
+        while true; do echo "123"; done
+    [2.2] for 循环
+        for i in {1,2,3}; do echo $i; done
+        for((i=1; i<3; i++)); do echo $i; done
+        awk 'BEGIN{for(i=1; i<3; i++) print i}'
+
+        for i in `ls`; do echo $i; done (for i in ./*; do echo $i; done)
+
+3、grep 命令 + "string" + filename
+    grep -i     忽略大小写
+    grep -w     全字符匹配，不忽略大小写
+    grep -c     计算文件中字符串出现的个数
+    grep -v     忽略字符串所在行
+    grep "^X"   匹配以 X 开头的行
+    grep "ab$"  匹配以 ab 结尾的行
+    grep -B 1   将查找的字符串上一行也进行打印
+    grep -A 1   将查找的字符串下一行也进行打印
+
+4、awk 命令
+    awk '{print length(), $$0}' + filename                      计算文件每一行的字符串长度
+    awk -v name=xjh '{if(NR % 10 == 1) {printf("%s", name)}}'   传参 -v 到 '' 中，NR：字符串序号
+    awk '{printf $$2 "\n"}'                                     打印文件第二列的字符串
+
+5、echo 命令
+    echo -e "\n"    转义字符串内容
+    echo -n " "     去掉末尾输出的换行符
