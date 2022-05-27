@@ -10,18 +10,34 @@
  */
 void recursion_topo_get(cJSON *obj, cJSON *result)
 {
-    cJSON *obj_mac = cJSON_GetObjectItem(obj, "mac");
-    if (NULL != obj_mac)
+	if (NULL == obj || NULL == result)
+	{
+		return;
+	}
+	int i = 0;
+    cJSON *obj_onlie_list = cJSON_GetObjectItem(obj, "onlineList");
+    if (NULL != obj_onlie_list)
     {
-        cJSON *tmp = cJSON_CreateObject();
-        cJSON_AddStringToObject(tmp, obj_mac->string, obj_mac->valuestring);
-        cJSON_AddItemToArray(result, tmp);
+		int online_size = cJSON_GetArraySize(obj_onlie_list);
+		for (i = 0; i < online_size; i++)
+		{
+			cJSON *online_list_ptr = cJSON_GetArrayItem(obj_onlie_list, i);
+			if (NULL != online_list_ptr)
+			{
+				cJSON *mac_node = cJSON_GetObjectItem(online_list_ptr, "mac");
+				if (NULL != mac_node)
+				{
+					cJSON *tmp = cJSON_CreateObject();
+					cJSON_AddStringToObject(tmp, mac_node->string, mac_node->valuestring);
+					cJSON_AddItemToArray(result, tmp);
+				}
+			}
+		}
     }
 
     cJSON *childNode = cJSON_GetObjectItem(obj, "childNode");
     if (NULL != childNode)
     {
-        int i = 0;
         int num = cJSON_GetArraySize(childNode);
         for (i = 0; i < num; i++)
         {
